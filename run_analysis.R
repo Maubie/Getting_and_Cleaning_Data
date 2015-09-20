@@ -34,7 +34,7 @@ run_analysis <- function() {
         X_test = X_test[,extract_features]
         
         #combine Activity_labels and y_test
-        y_test_labeled <- join(y_test, activity_labels, by="Activity_ID")
+        y_test_labeled <- join(y_test, activity_labels, by="activity_id")
         
         #bind test data into one data.frame
         test_data <- cbind(subject_test, y_test_labeled, X_test)
@@ -46,27 +46,27 @@ run_analysis <- function() {
         
         #name columns in train data
         names(X_train) = features2
-        names(y_train) = c("Activity_ID")
-        names(subject_train) = c("Subject")
+        names(y_train) = c("activity_id")
+        names(subject_train) = c("subject")
         
         #extract mean and std features from X_train
         X_train = X_train[,extract_features]
         
         #combine Activity_labels and y_train
-        y_train_labeled <- join(y_train, activity_labels, by="Activity_ID")
+        y_train_labeled <- join(y_train, activity_labels, by="activity_id")
         
         #bind train data into one data.frame
         train_data <- cbind(subject_train, y_train_labeled, X_train)
         
         #combine test and train data to form question 4 dataset
         combined_data <- rbind(test_data, train_data)
-        combined_data <- arrange(combined_data, Subject, Activity_ID)
+        combined_data <- arrange(combined_data, subject, activity_id)
         
         #group by subject and activity and then take the mean of each variable
-        combined_data2 <- combined_data %>% group_by (Subject, Activity_ID) %>% summarise_each(funs(mean), -Activity_Label)
+        combined_data2 <- combined_data %>% group_by (subject, activity_id) %>% summarise_each(funs(mean), -activity_label)
         
         #add back in activity_labels
-        combined_data2_labeled <- join(combined_data2,activity_labels, by="Activity_ID")
+        combined_data2_labeled <- join(combined_data2,activity_labels, by="activity_id")
         
         #create the tidy data set
         tidy_data <- combined_data2_labeled[,c(1:2, 82, 3:81)]
