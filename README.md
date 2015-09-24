@@ -4,7 +4,7 @@ CODE BOOK
 
 The data produced by the run_analysis.R script, written to the tidy_data.txt file represents the average of each variable for each activity and each subject from the original raw data set found at http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones .
 
-The origianl raw data set includes the following files:
+The original raw data set includes the following files:
 =========================================
 
 - 'README.txt'
